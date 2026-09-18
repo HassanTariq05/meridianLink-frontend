@@ -1,8 +1,8 @@
 import { useTheme } from '@/context/theme-provider'
 // Import the background image
 import LoginBg from '../../../public/images/login-bg.jpg'
-import DarkModeLogo from '../../../public/images/total-quality-app-logo-dark.png'
-import LightModeLogo from '../../../public/images/total-quality-app-logo-light.png'
+import DarkModeLogo from '../../../public/images/logo.png'
+import LightModeLogo from '../../../public/images/logo.png'
 
 type AuthLayoutProps = {
   children: React.ReactNode
