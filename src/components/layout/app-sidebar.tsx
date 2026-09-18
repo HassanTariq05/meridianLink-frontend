@@ -8,10 +8,6 @@ import {
   SidebarRail,
   useSidebar,
 } from '@/components/ui/sidebar'
-import DarkModeLogo from '../../../public/images/logo.png'
-import LightModeLogo from '../../../public/images/logo.png'
-import DarkModeLogoCollapsed from '../../../public/images/logo_collapsed.png'
-import LightModeLogoCollapsed from '../../../public/images/logo_collapsed.png'
 import { sidebarData } from './data/sidebar-data'
 import { NavGroup } from './nav-group'
 import { SidebarData } from './types'
@@ -81,7 +77,7 @@ export function AppSidebar() {
             }}
           >
             <img
-              src={theme === 'dark' ? DarkModeLogo : LightModeLogo}
+              src={theme === 'dark' ? '/images/logo.png' : '/images/logo.png'}
               alt='Total Quality App Logo'
               style={{ height: '32px', width: 'auto' }}
             />
@@ -100,8 +96,8 @@ export function AppSidebar() {
             <img
               src={
                 theme === 'dark'
-                  ? DarkModeLogoCollapsed
-                  : LightModeLogoCollapsed
+                  ? '/images/logo_collapsed.png'
+                  : '/images/logo_collapsed.png'
               }
               alt='Total Quality App Logo'
               style={{ height: '32px', width: 'auto' }}
