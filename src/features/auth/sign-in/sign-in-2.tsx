@@ -1,7 +1,7 @@
 import { Logo } from '@/assets/logo'
 import { cn } from '@/lib/utils'
-import dashboardDark from './assets/dashboard-dark.png'
-import dashboardLight from './assets/dashboard-light.png'
+// import dashboardDark from './assets/dashboard-dark.png'
+// import dashboardLight from './assets/dashboard-light.png'
 import { UserAuthForm } from './components/user-auth-form'
 
 export function SignIn2() {
@@ -49,7 +49,7 @@ export function SignIn2() {
           '[&>img]:absolute [&>img]:top-[15%] [&>img]:left-20 [&>img]:h-full [&>img]:w-full [&>img]:object-cover [&>img]:object-top-left [&>img]:select-none'
         )}
       >
-        <img
+        {/* <img
           src={dashboardLight}
           className='dark:hidden'
           width={1024}
@@ -62,7 +62,7 @@ export function SignIn2() {
           width={1024}
           height={1138}
           alt='Shadcn-Admin'
-        />
+        /> */}
       </div>
     </div>
   )
