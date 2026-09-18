@@ -78,7 +78,7 @@ export function DataTableRowActions<TData>({
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
-                setCurrentRow(task)
+                setCurrentRow(task as any)
                 setOpen('delete-chapter')
               }}
             >
