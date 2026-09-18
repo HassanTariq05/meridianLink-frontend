@@ -1,40 +1,37 @@
-import { ReactNode, useEffect, useState } from 'react'
-import axios from 'axios'
-import { useRouter } from '@tanstack/react-router'
+import { ReactNode, useState } from 'react'
 import { Loader2 } from 'lucide-react'
-import { useAuthStore } from '@/stores/auth-store'
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const { auth } = useAuthStore()
-  const [loading, setLoading] = useState(true)
-  const navigator = useRouter()
+  // const { auth } = useAuthStore()
+  const [loading] = useState(true)
+  // const navigator = useRouter()
 
-  useEffect(() => {
-    const init = async () => {
-      if (!auth.accessToken) {
-        setLoading(false)
-        navigator.navigate({ to: '/sign-in' })
-      }
+  // useEffect(() => {
+  //   const init = async () => {
+  //     if (!auth.accessToken) {
+  //       setLoading(false)
+  //       navigator.navigate({ to: '/sign-in' })
+  //     }
 
-      try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_AUTH_BASE_URL}/me`,
-          {
-            headers: {
-              Authorization: `Bearer ${auth.accessToken}`,
-            },
-          }
-        )
-        auth.setUser(data.user)
-      } catch (err) {
-        auth.reset()
-      } finally {
-        setLoading(false)
-      }
-    }
+  //     try {
+  //       const { data } = await axios.get(
+  //         `${import.meta.env.VITE_AUTH_BASE_URL}/me`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${auth.accessToken}`,
+  //           },
+  //         }
+  //       )
+  //       auth.setUser(data.user)
+  //     } catch (err) {
+  //       auth.reset()
+  //     } finally {
+  //       setLoading(false)
+  //     }
+  //   }
 
-    init()
-  }, [])
+  //   init()
+  // }, [])
 
   if (loading) {
     return (
