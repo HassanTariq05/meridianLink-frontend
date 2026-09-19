@@ -231,6 +231,12 @@ export function RecordsView() {
                   </div>
 
                   <div className='flex flex-col gap-2'>
+                    <div>
+                      <h2 className='text-sm font-semibold'>Agent activity</h2>
+                      <p className='text-muted-foreground text-xs'>
+                        View follow-up activity for a specific date.
+                      </p>
+                    </div>
                     <div className='flex items-center gap-2'>
                       <Popover>
                         <PopoverTrigger asChild>
@@ -271,15 +277,6 @@ export function RecordsView() {
                         </Button>
                       )}
                     </div>
-                  </div>
-                </div>
-
-                <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
-                  <div>
-                    <h2 className='text-sm font-semibold'>Agent activity</h2>
-                    <p className='text-muted-foreground text-xs'>
-                      View follow-up activity for a specific date.
-                    </p>
                   </div>
                 </div>
 
@@ -360,7 +357,7 @@ export function RecordsView() {
               <div>
                 <div className='flex items-center gap-2'>
                   <h2 className='text-lg font-semibold'>
-                    Agent-generated records
+                    Agent-generated follow-ups
                   </h2>
                   <div className='flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] font-medium text-emerald-600 dark:text-emerald-400'>
                     <span className='relative flex h-1.5 w-1.5'>
