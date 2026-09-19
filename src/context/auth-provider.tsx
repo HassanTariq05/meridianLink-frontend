@@ -3,7 +3,7 @@ import { Loader2 } from 'lucide-react'
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // const { auth } = useAuthStore()
-  const [loading] = useState(true)
+  const [loading] = useState(false)
   // const navigator = useRouter()
 
   // useEffect(() => {
