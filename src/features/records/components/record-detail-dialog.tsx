@@ -145,14 +145,14 @@ export function RecordDetailDialog() {
 
   const handleApprove = () => {
     approveLoanFollowupMutation.mutate({
-      id: currentRow.leadId,
+      id: currentRow.id,
       status: 'approved',
     })
   }
 
   const handleReject = () => {
     rejectLoanFollowupMutation.mutate({
-      id: currentRow.leadId,
+      id: currentRow.id,
       status: 'rejected',
     })
   }
