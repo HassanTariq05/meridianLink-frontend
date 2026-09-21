@@ -108,15 +108,15 @@ export function RecordsView() {
     }
 
     const pending = records.filter(
-      (r) => r.status?.toLowerCase() === 'pending'
+      (r) => r.lead_status?.toLowerCase() === 'pending'
     ).length
 
     const sent = records.filter(
-      (r) => r.status?.toLowerCase() === 'approved'
+      (r) => r.lead_status?.toLowerCase() === 'approved'
     ).length
 
     const discarded = records.filter(
-      (r) => r.status?.toLowerCase() === 'rejected'
+      (r) => r.lead_status?.toLowerCase() === 'rejected'
     ).length
 
     const latestRecord = [...records].sort(

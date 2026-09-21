@@ -3,9 +3,9 @@ import {
   CalendarDays,
   CheckCircle2,
   Clock3,
-  DollarSign,
   Loader2,
   Mail,
+  Phone,
   Send,
   User,
 } from 'lucide-react'
@@ -39,16 +39,6 @@ function formatDate(value?: string) {
     minute: '2-digit',
     hour12: true,
   })
-}
-
-function formatCurrency(value?: number) {
-  if (value == null) return '—'
-
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  }).format(value)
 }
 
 function getStatusIcon(status?: string) {
@@ -98,6 +88,7 @@ const FIELD_COLORS = {
   loanAmount: 'bg-emerald-500/10 text-emerald-500',
   created: 'bg-slate-500/10 text-slate-500',
   updated: 'bg-slate-500/10 text-slate-500',
+  phone: 'bg-lime-500/10 text-lime-500',
 } as const
 
 function FieldRow({
@@ -130,7 +121,7 @@ export function RecordDetailDialog() {
   const { open, setOpen, currentRow } = useTasks()
 
   const isOpen = open === 'view'
-  const isPending = currentRow?.status?.toLowerCase() === 'pending'
+  const isPending = currentRow?.lead_status?.toLowerCase() === 'pending'
 
   if (!currentRow) {
     return null
@@ -157,7 +148,7 @@ export function RecordDetailDialog() {
     })
   }
 
-  const StatusIcon = getStatusIcon(currentRow.status)
+  const StatusIcon = getStatusIcon(currentRow.lead_status)
 
   return (
     <Dialog
@@ -181,7 +172,7 @@ export function RecordDetailDialog() {
           </DialogTitle>
 
           <DialogDescription className='relative'>
-            Lead #{currentRow.leadId} · Record #{currentRow.id}
+            Lead #{currentRow.lead_id} · Record #{currentRow.id}
           </DialogDescription>
         </DialogHeader>
 
@@ -202,33 +193,21 @@ export function RecordDetailDialog() {
                 color={FIELD_COLORS.customer}
                 label='Customer'
               >
-                {currentRow.customerName}
+                {`${currentRow.first_name} ${currentRow.last_name}`}
               </FieldRow>
 
               <FieldRow icon={Mail} color={FIELD_COLORS.email} label='Email'>
                 <span className='break-all'>{currentRow.email}</span>
               </FieldRow>
 
-              <FieldRow
-                icon={DollarSign}
-                color={FIELD_COLORS.loanType}
-                label='Loan Type'
-              >
-                {currentRow.loanType}
-              </FieldRow>
-
-              <FieldRow
-                icon={DollarSign}
-                color={FIELD_COLORS.loanAmount}
-                label='Loan Amount'
-              >
-                {formatCurrency(currentRow.loanAmount)}
+              <FieldRow icon={Phone} color={FIELD_COLORS.phone} label='Phone'>
+                <span className='break-all'>{currentRow.phone}</span>
               </FieldRow>
 
               {/* Status */}
               <div className='flex items-start gap-3'>
                 <div
-                  className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${getStatusClass(currentRow.status)}`}
+                  className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${getStatusClass(currentRow.lead_status)}`}
                 >
                   <CheckCircle2 className='size-4' />
                 </div>
@@ -239,7 +218,7 @@ export function RecordDetailDialog() {
                   <Badge
                     variant='outline'
                     className={`mt-1 rounded-full border-none capitalize ${getStatusClass(
-                      currentRow.status
+                      currentRow.lead_status
                     )}`}
                   >
                     {isPending ? (
@@ -250,7 +229,7 @@ export function RecordDetailDialog() {
                     ) : (
                       StatusIcon && <StatusIcon className='size-3.5' />
                     )}
-                    {getStatusLabel(currentRow.status)}
+                    {getStatusLabel(currentRow.lead_status)}
                   </Badge>
                 </div>
               </div>
@@ -291,7 +270,7 @@ export function RecordDetailDialog() {
                   </span>
 
                   <span className='min-w-0 text-sm break-all'>
-                    {currentRow.customerName}{' '}
+                    {`${currentRow.first_name} ${currentRow.last_name}`}{' '}
                     <span className='text-muted-foreground'>
                       &lt;{currentRow.email}&gt;
                     </span>

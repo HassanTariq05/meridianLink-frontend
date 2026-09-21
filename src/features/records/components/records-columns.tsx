@@ -1,6 +1,6 @@
 import { type ColumnDef } from '@tanstack/react-table'
 import { type LoanFollowupEmail } from '@/services/record-services/record-services'
-import { Mail, User, Send, Ban, Clock } from 'lucide-react'
+import { Mail, User, Send, Ban, Clock, Phone } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { DataTableColumnHeader } from '@/components/data-table'
 
@@ -24,17 +24,7 @@ function formatDate(value?: string) {
   return `${datePart} ${timePart}`
 }
 
-function formatCurrency(value?: number) {
-  if (value == null) return '—'
-
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  }).format(value)
-}
-
-// Deterministic gradient per customer, so the same name always gets the same avatar color
+// Deterministic gradient per customer
 const AVATAR_GRADIENTS = [
   'from-sky-400/90 to-blue-500/90',
   'from-violet-400/90 to-fuchsia-500/90',
@@ -45,39 +35,34 @@ const AVATAR_GRADIENTS = [
 
 function avatarGradient(name?: string) {
   if (!name) return AVATAR_GRADIENTS[0]
-  const hash = [...name].reduce((acc, c) => acc + c.charCodeAt(0), 0)
-  return AVATAR_GRADIENTS[hash % AVATAR_GRADIENTS.length]
-}
 
-const LOAN_TYPE_DOT: Record<string, string> = {
-  personal: 'bg-sky-500',
-  auto: 'bg-violet-500',
-  home: 'bg-emerald-500',
-  business: 'bg-amber-500',
-  mortgage: 'bg-emerald-500',
-  student: 'bg-fuchsia-500',
+  const hash = [...name].reduce((acc, c) => acc + c.charCodeAt(0), 0)
+
+  return AVATAR_GRADIENTS[hash % AVATAR_GRADIENTS.length]
 }
 
 export const recordsColumns: ColumnDef<LoanFollowupEmail>[] = [
   {
-    accessorKey: 'leadId',
+    accessorKey: 'lead_id',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Lead ID' />
     ),
     cell: ({ row }) => (
       <span className='text-muted-foreground font-mono text-xs font-medium'>
-        #{row.getValue('leadId')}
+        #{row.original.lead_id}
       </span>
     ),
   },
 
   {
-    accessorKey: 'customerName',
+    accessorKey: 'first_name',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Customer' />
     ),
     cell: ({ row }) => {
-      const customerName = row.getValue('customerName') as string
+      const firstName = row.original.first_name
+      const lastName = row.original.last_name
+      const customerName = [firstName, lastName].filter(Boolean).join(' ')
       const email = row.original.email
 
       return (
@@ -91,11 +76,13 @@ export const recordsColumns: ColumnDef<LoanFollowupEmail>[] = [
           </div>
 
           <div className='min-w-0'>
-            <div className='truncate text-sm font-medium'>{customerName}</div>
+            <div className='truncate text-sm font-medium'>
+              {customerName || '—'}
+            </div>
 
             <div className='text-muted-foreground flex items-center gap-1 truncate text-xs'>
               <Mail size={11} />
-              {email}
+              {email || '—'}
             </div>
           </div>
         </div>
@@ -104,53 +91,56 @@ export const recordsColumns: ColumnDef<LoanFollowupEmail>[] = [
   },
 
   {
-    accessorKey: 'loanType',
+    accessorKey: 'company',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Loan Type' />
+      <DataTableColumnHeader column={column} title='Company' />
     ),
     cell: ({ row }) => {
-      const loanType = row.getValue('loanType') as string
-      const dot =
-        LOAN_TYPE_DOT[loanType?.toLowerCase()] ?? 'bg-muted-foreground'
+      const company = row.original.company
 
       return (
         <div className='flex items-center gap-1.5 text-sm font-medium'>
-          <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${dot}`} />
-          {loanType}
+          <span className='h-1.5 w-1.5 shrink-0 rounded-full bg-sky-500' />
+          <span className='truncate'>{company || '—'}</span>
         </div>
       )
     },
   },
 
   {
-    accessorKey: 'loanAmount',
+    accessorKey: 'phone',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Loan Amount' />
+      <DataTableColumnHeader column={column} title='Phone' />
     ),
-    cell: ({ row }) => (
-      <div className='flex justify-end text-right text-sm font-semibold tabular-nums'>
-        {formatCurrency(row.getValue('loanAmount'))}
-      </div>
-    ),
+    cell: ({ row }) => {
+      const phone = row.original.phone
+
+      return (
+        <div className='flex items-center gap-2 text-sm font-medium tabular-nums'>
+          <Phone size={14} className='text-muted-foreground shrink-0' />
+          <span>{phone || '—'}</span>
+        </div>
+      )
+    },
   },
 
   {
-    accessorKey: 'status',
+    accessorKey: 'lead_status',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Status' />
     ),
     cell: ({ row }) => {
-      const status = row.getValue('status') as string
+      const status = row.original.lead_status
 
       const statusConfig = {
         approved: {
-          label: 'Email Sent',
+          label: 'Approved',
           icon: Send,
           className:
             'bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/20 dark:text-emerald-400',
         },
         rejected: {
-          label: 'Discarded',
+          label: 'Rejected',
           icon: Ban,
           className:
             'bg-red-500/10 text-red-600 ring-1 ring-red-500/20 dark:text-red-400',
@@ -164,10 +154,12 @@ export const recordsColumns: ColumnDef<LoanFollowupEmail>[] = [
         },
       } as const
 
+      const normalizedStatus = status?.toLowerCase()
+
       const config = statusConfig[
-        status.toLowerCase() as keyof typeof statusConfig
+        normalizedStatus as keyof typeof statusConfig
       ] ?? {
-        label: status,
+        label: status || '—',
         icon: null,
         className: 'bg-muted text-muted-foreground',
         pulse: false,
@@ -188,6 +180,7 @@ export const recordsColumns: ColumnDef<LoanFollowupEmail>[] = [
           ) : (
             Icon && <Icon size={12} />
           )}
+
           {config.label}
         </Badge>
       )
@@ -201,7 +194,7 @@ export const recordsColumns: ColumnDef<LoanFollowupEmail>[] = [
     ),
     cell: ({ row }) => (
       <span className='text-muted-foreground text-sm whitespace-nowrap'>
-        {formatDate(row.getValue('createdAt'))}
+        {formatDate(row.original.createdAt)}
       </span>
     ),
   },

@@ -8,12 +8,13 @@ export interface ValidicMetric {
 
 export interface LoanFollowupEmail {
   id: number
-  leadId: number
-  customerName: string
+  lead_id: string
+  company: string
+  first_name: string
+  last_name: string
   email: string
-  loanType: string
-  loanAmount: number
-  status: string
+  phone: string
+  lead_status: string
   subject: string
   body: string
   createdAt: string
