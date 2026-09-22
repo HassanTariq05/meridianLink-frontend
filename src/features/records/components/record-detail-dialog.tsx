@@ -121,7 +121,7 @@ export function RecordDetailDialog() {
   const { open, setOpen, currentRow } = useTasks()
 
   const isOpen = open === 'view'
-  const isPending = currentRow?.lead_status?.toLowerCase() === 'pending'
+  const isPending = currentRow?.status?.toLowerCase() === 'pending'
 
   if (!currentRow) {
     return null
@@ -148,7 +148,7 @@ export function RecordDetailDialog() {
     })
   }
 
-  const StatusIcon = getStatusIcon(currentRow.lead_status)
+  const StatusIcon = getStatusIcon(currentRow.status)
 
   return (
     <Dialog
@@ -207,7 +207,7 @@ export function RecordDetailDialog() {
               {/* Status */}
               <div className='flex items-start gap-3'>
                 <div
-                  className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${getStatusClass(currentRow.lead_status)}`}
+                  className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${getStatusClass(currentRow.status)}`}
                 >
                   <CheckCircle2 className='size-4' />
                 </div>
@@ -218,7 +218,7 @@ export function RecordDetailDialog() {
                   <Badge
                     variant='outline'
                     className={`mt-1 rounded-full border-none capitalize ${getStatusClass(
-                      currentRow.lead_status
+                      currentRow.status
                     )}`}
                   >
                     {isPending ? (
@@ -229,7 +229,7 @@ export function RecordDetailDialog() {
                     ) : (
                       StatusIcon && <StatusIcon className='size-3.5' />
                     )}
-                    {getStatusLabel(currentRow.lead_status)}
+                    {getStatusLabel(currentRow.status)}
                   </Badge>
                 </div>
               </div>

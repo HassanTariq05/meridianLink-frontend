@@ -14,7 +14,7 @@ export interface LoanFollowupEmail {
   last_name: string
   email: string
   phone: string
-  lead_status: string
+  status: string
   subject: string
   body: string
   createdAt: string

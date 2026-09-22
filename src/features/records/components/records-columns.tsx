@@ -125,12 +125,12 @@ export const recordsColumns: ColumnDef<LoanFollowupEmail>[] = [
   },
 
   {
-    accessorKey: 'lead_status',
+    accessorKey: 'status',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Status' />
     ),
     cell: ({ row }) => {
-      const status = row.original.lead_status
+      const status = row.original.status
 
       const statusConfig = {
         approved: {
