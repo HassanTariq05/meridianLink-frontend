@@ -5,6 +5,7 @@ import {
   Clock3,
   Loader2,
   Mail,
+  NotebookText,
   Phone,
   Send,
   User,
@@ -54,6 +55,22 @@ function getStatusIcon(status?: string) {
   }
 }
 
+const getNotes = (notes?: string) => {
+  if (!notes) return '—'
+
+  const formattedNotes = notes.split('|||NOTE|||').filter(Boolean)
+
+  return (
+    <div className='space-y-2'>
+      {formattedNotes.map((note, index) => (
+        <div key={index} className='rounded-md border p-2'>
+          {note}
+        </div>
+      ))}
+    </div>
+  )
+}
+
 function getStatusClass(status?: string) {
   switch (status?.toLowerCase()) {
     case 'approved':
@@ -89,6 +106,7 @@ const FIELD_COLORS = {
   created: 'bg-slate-500/10 text-slate-500',
   updated: 'bg-slate-500/10 text-slate-500',
   phone: 'bg-lime-500/10 text-lime-500',
+  notes: 'bg-fuchsia-500/10 text-fuchsia-500',
 } as const
 
 function FieldRow({
@@ -233,6 +251,14 @@ export function RecordDetailDialog() {
                   </Badge>
                 </div>
               </div>
+
+              <FieldRow
+                icon={NotebookText}
+                color={FIELD_COLORS.notes}
+                label='Notes'
+              >
+                {getNotes(currentRow.notes)}
+              </FieldRow>
 
               <FieldRow
                 icon={Clock3}

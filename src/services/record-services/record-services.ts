@@ -19,6 +19,7 @@ export interface LoanFollowupEmail {
   body: string
   createdAt: string
   updatedAt: string
+  notes: string
 }
 interface PageResponse<T> {
   content: T[]
