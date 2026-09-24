@@ -1,6 +1,6 @@
 import { type ColumnDef } from '@tanstack/react-table'
 import { type LoanFollowupEmail } from '@/services/record-services/record-services'
-import { Mail, User, Send, Ban, Clock, Phone } from 'lucide-react'
+import { Mail, User, Send, Ban, Clock, Phone, Eye } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { DataTableColumnHeader } from '@/components/data-table'
 
@@ -196,6 +196,34 @@ export const recordsColumns: ColumnDef<LoanFollowupEmail>[] = [
       <span className='text-muted-foreground text-sm whitespace-nowrap'>
         {formatDate(row.original.createdAt)}
       </span>
+    ),
+  },
+  {
+    id: 'actions',
+    header: '',
+    enableSorting: false,
+    enableHiding: false,
+    size: 52,
+    cell: ({ row }) => (
+      <div className='flex justify-end'>
+        <button
+          type='button'
+          title='View record'
+          aria-label='View record'
+          onClick={() => {
+            console.log('View record:', row.original)
+          }}
+          className='group border-border/60 bg-background/80 text-muted-foreground relative inline-flex size-8 items-center justify-center rounded-lg border shadow-sm backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-500/40 hover:bg-sky-500/10 hover:text-sky-600 hover:shadow-md hover:shadow-sky-500/10 active:translate-y-0 dark:hover:text-sky-400'
+        >
+          <Eye
+            size={15}
+            strokeWidth={1.8}
+            className='transition-transform duration-200 group-hover:scale-110'
+          />
+
+          <span className='pointer-events-none absolute inset-0 rounded-lg ring-1 ring-transparent transition-all duration-200 ring-inset group-hover:ring-sky-500/20' />
+        </button>
+      </div>
     ),
   },
 ]
