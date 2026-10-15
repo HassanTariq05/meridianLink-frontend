@@ -22,6 +22,8 @@ import { Route as AuthenticatedUsersRouteRouteImport } from './routes/_authentic
 import { Route as AuthenticatedRolesRouteRouteImport } from './routes/_authenticated/roles/route'
 import { Route as AuthenticatedOrganizationsRouteRouteImport } from './routes/_authenticated/organizations/route'
 import { Route as AuthenticatedLoanFollowupAgentRouteRouteImport } from './routes/_authenticated/loan-followup-agent/route'
+import { Route as AuthenticatedHealthcareAgentRouteRouteImport } from './routes/_authenticated/healthcare-agent/route'
+import { Route as AuthenticatedChatAgentRouteRouteImport } from './routes/_authenticated/chat-agent/route'
 import { Route as AuthenticatedManageRoleRoleIdRouteRouteImport } from './routes/_authenticated/manage-role/$roleId/route'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
@@ -90,6 +92,18 @@ const AuthenticatedLoanFollowupAgentRouteRoute =
     path: '/loan-followup-agent',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedHealthcareAgentRouteRoute =
+  AuthenticatedHealthcareAgentRouteRouteImport.update({
+    id: '/healthcare-agent',
+    path: '/healthcare-agent',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedChatAgentRouteRoute =
+  AuthenticatedChatAgentRouteRouteImport.update({
+    id: '/chat-agent',
+    path: '/chat-agent',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedManageRoleRoleIdRouteRoute =
   AuthenticatedManageRoleRoleIdRouteRouteImport.update({
     id: '/manage-role/$roleId',
@@ -98,6 +112,8 @@ const AuthenticatedManageRoleRoleIdRouteRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
+  '/chat-agent': typeof AuthenticatedChatAgentRouteRoute
+  '/healthcare-agent': typeof AuthenticatedHealthcareAgentRouteRoute
   '/loan-followup-agent': typeof AuthenticatedLoanFollowupAgentRouteRoute
   '/organizations': typeof AuthenticatedOrganizationsRouteRoute
   '/roles': typeof AuthenticatedRolesRouteRoute
@@ -113,6 +129,8 @@ export interface FileRoutesByFullPath {
   '/manage-role/$roleId': typeof AuthenticatedManageRoleRoleIdRouteRoute
 }
 export interface FileRoutesByTo {
+  '/chat-agent': typeof AuthenticatedChatAgentRouteRoute
+  '/healthcare-agent': typeof AuthenticatedHealthcareAgentRouteRoute
   '/loan-followup-agent': typeof AuthenticatedLoanFollowupAgentRouteRoute
   '/organizations': typeof AuthenticatedOrganizationsRouteRoute
   '/roles': typeof AuthenticatedRolesRouteRoute
@@ -130,6 +148,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/_authenticated/chat-agent': typeof AuthenticatedChatAgentRouteRoute
+  '/_authenticated/healthcare-agent': typeof AuthenticatedHealthcareAgentRouteRoute
   '/_authenticated/loan-followup-agent': typeof AuthenticatedLoanFollowupAgentRouteRoute
   '/_authenticated/organizations': typeof AuthenticatedOrganizationsRouteRoute
   '/_authenticated/roles': typeof AuthenticatedRolesRouteRoute
@@ -147,6 +167,8 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/chat-agent'
+    | '/healthcare-agent'
     | '/loan-followup-agent'
     | '/organizations'
     | '/roles'
@@ -162,6 +184,8 @@ export interface FileRouteTypes {
     | '/manage-role/$roleId'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/chat-agent'
+    | '/healthcare-agent'
     | '/loan-followup-agent'
     | '/organizations'
     | '/roles'
@@ -178,6 +202,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_authenticated'
+    | '/_authenticated/chat-agent'
+    | '/_authenticated/healthcare-agent'
     | '/_authenticated/loan-followup-agent'
     | '/_authenticated/organizations'
     | '/_authenticated/roles'
@@ -297,6 +323,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLoanFollowupAgentRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/healthcare-agent': {
+      id: '/_authenticated/healthcare-agent'
+      path: '/healthcare-agent'
+      fullPath: '/healthcare-agent'
+      preLoaderRoute: typeof AuthenticatedHealthcareAgentRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/chat-agent': {
+      id: '/_authenticated/chat-agent'
+      path: '/chat-agent'
+      fullPath: '/chat-agent'
+      preLoaderRoute: typeof AuthenticatedChatAgentRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/manage-role/$roleId': {
       id: '/_authenticated/manage-role/$roleId'
       path: '/manage-role/$roleId'
@@ -308,6 +348,8 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedChatAgentRouteRoute: typeof AuthenticatedChatAgentRouteRoute
+  AuthenticatedHealthcareAgentRouteRoute: typeof AuthenticatedHealthcareAgentRouteRoute
   AuthenticatedLoanFollowupAgentRouteRoute: typeof AuthenticatedLoanFollowupAgentRouteRoute
   AuthenticatedOrganizationsRouteRoute: typeof AuthenticatedOrganizationsRouteRoute
   AuthenticatedRolesRouteRoute: typeof AuthenticatedRolesRouteRoute
@@ -317,6 +359,9 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedChatAgentRouteRoute: AuthenticatedChatAgentRouteRoute,
+  AuthenticatedHealthcareAgentRouteRoute:
+    AuthenticatedHealthcareAgentRouteRoute,
   AuthenticatedLoanFollowupAgentRouteRoute:
     AuthenticatedLoanFollowupAgentRouteRoute,
   AuthenticatedOrganizationsRouteRoute: AuthenticatedOrganizationsRouteRoute,
