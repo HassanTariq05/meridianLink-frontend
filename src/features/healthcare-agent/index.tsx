@@ -7,7 +7,7 @@ import {
   Activity,
   AlertCircle,
   CalendarDays,
-  HeartPulse,
+  Mic,
   Pill,
   Sparkles,
 } from 'lucide-react'
@@ -140,7 +140,7 @@ export function HealthcareAgentView() {
 
             <div className='relative flex items-center gap-3 p-3 sm:p-3.5'>
               <div className='relative flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 via-fuchsia-500 to-sky-500 shadow-sm shadow-violet-500/20'>
-                <HeartPulse className='h-4.5 w-4.5 text-white' />
+                <Mic className='h-4.5 w-4.5 text-white' />
                 <span className='border-background absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 bg-emerald-500'>
                   <span className='relative h-1.5 w-1.5 rounded-full bg-white' />
                 </span>
@@ -149,7 +149,7 @@ export function HealthcareAgentView() {
               <div className='min-w-0 flex-1'>
                 <div className='mb-0.5 flex flex-wrap items-center gap-1.5'>
                   <h1 className='text-base font-semibold tracking-tight sm:text-lg'>
-                    Healthcare Agent
+                    Help Desk Agent - Voice
                   </h1>
                   <Badge
                     variant='outline'

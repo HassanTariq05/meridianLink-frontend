@@ -1,4 +1,4 @@
-import { Bot, Command, HeartHandshake, MessagesSquare } from 'lucide-react'
+import { Bot, Command, MessagesSquare, Mic } from 'lucide-react'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
@@ -31,9 +31,9 @@ export const sidebarData: SidebarData = {
         },
 
         {
-          title: 'Healthcare Agent',
+          title: 'Help Desk Agent 1',
           url: '/healthcare-agent',
-          icon: HeartHandshake,
+          icon: Mic,
         },
         // {
         //   title: 'Tasks',

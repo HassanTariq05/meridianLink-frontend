@@ -6,6 +6,7 @@ import {
   PatientCell,
   RecordIdCode,
   StatusBadge,
+  TimeCell,
   ViewButton,
   formatAppointmentSlot,
   getPatientName,
@@ -36,22 +37,6 @@ export function getAppointmentColumns(
       ),
     },
     {
-      id: 'slot',
-      accessorFn: (row) => `${row.appointment_date} ${row.start_time}`,
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title='Date & time' />
-      ),
-      cell: ({ row }) => (
-        <span className='inline-flex items-center gap-1.5 rounded-md bg-teal-500/10 px-2 py-1 text-xs font-medium text-teal-700 ring-1 ring-teal-500/20 dark:text-teal-300'>
-          <CalendarDays className='h-3 w-3' />
-          {formatAppointmentSlot(
-            row.original.appointment_date,
-            row.original.start_time
-          )}
-        </span>
-      ),
-    },
-    {
       id: 'provider',
       accessorFn: (row) => row.doctor?.doctor_name ?? '',
       header: ({ column }) => (
@@ -72,11 +57,35 @@ export function getAppointmentColumns(
       ),
     },
     {
+      id: 'slot',
+      accessorFn: (row) => `${row.appointment_date} ${row.start_time}`,
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title='Booked Slot' />
+      ),
+      cell: ({ row }) => (
+        <span className='inline-flex items-center gap-1.5 rounded-md bg-teal-500/10 px-2 py-1 text-xs font-medium text-teal-700 ring-1 ring-teal-500/20 dark:text-teal-300'>
+          <CalendarDays className='h-3 w-3' />
+          {formatAppointmentSlot(
+            row.original.appointment_date,
+            row.original.start_time
+          )}
+        </span>
+      ),
+    },
+
+    {
       accessorKey: 'status',
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title='Status' />
       ),
       cell: ({ row }) => <StatusBadge status={row.original.status} />,
+    },
+    {
+      accessorKey: 'created_at',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title='Created On' />
+      ),
+      cell: ({ row }) => <TimeCell value={row.original.created_at} />,
     },
     {
       id: 'actions',

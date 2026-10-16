@@ -1,6 +1,7 @@
 import { format, parseISO } from 'date-fns'
 import type { Patient } from '@/services/healthcare-agent-services/healthcare-agent-services'
 import { Building2, Eye, Phone, Pill } from 'lucide-react'
+import moment from 'moment'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -90,12 +91,13 @@ export function formatRelativeTime(value: string): string {
 }
 
 export function formatAppointmentSlot(date: string, startTime: string): string {
-  const parsed = new Date(`${date}T${startTime}`)
-  return Number.isNaN(parsed.getTime())
-    ? `${date} ${startTime}`
-    : format(parsed, 'EEE, MMM d · h:mm a')
-}
+  const day = moment(date).local().format('YYYY-MM-DD')
+  const slot = moment(`${day} ${startTime?.trim()}`, 'YYYY-MM-DD HH:mm', true)
 
+  return slot.isValid()
+    ? slot.format('ddd, MMM D · h:mm A')
+    : `${date} ${startTime}`
+}
 export function PatientCell({
   name,
   phone,
