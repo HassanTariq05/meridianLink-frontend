@@ -22,6 +22,7 @@ import { Route as AuthenticatedUsersRouteRouteImport } from './routes/_authentic
 import { Route as AuthenticatedRolesRouteRouteImport } from './routes/_authenticated/roles/route'
 import { Route as AuthenticatedOrganizationsRouteRouteImport } from './routes/_authenticated/organizations/route'
 import { Route as AuthenticatedLoanFollowupAgentRouteRouteImport } from './routes/_authenticated/loan-followup-agent/route'
+import { Route as AuthenticatedLoanApplicationAgentRouteRouteImport } from './routes/_authenticated/loan-application-agent/route'
 import { Route as AuthenticatedHealthcareAgentRouteRouteImport } from './routes/_authenticated/healthcare-agent/route'
 import { Route as AuthenticatedChatAgentRouteRouteImport } from './routes/_authenticated/chat-agent/route'
 import { Route as AuthenticatedManageRoleRoleIdRouteRouteImport } from './routes/_authenticated/manage-role/$roleId/route'
@@ -92,6 +93,12 @@ const AuthenticatedLoanFollowupAgentRouteRoute =
     path: '/loan-followup-agent',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedLoanApplicationAgentRouteRoute =
+  AuthenticatedLoanApplicationAgentRouteRouteImport.update({
+    id: '/loan-application-agent',
+    path: '/loan-application-agent',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedHealthcareAgentRouteRoute =
   AuthenticatedHealthcareAgentRouteRouteImport.update({
     id: '/healthcare-agent',
@@ -114,6 +121,7 @@ const AuthenticatedManageRoleRoleIdRouteRoute =
 export interface FileRoutesByFullPath {
   '/chat-agent': typeof AuthenticatedChatAgentRouteRoute
   '/healthcare-agent': typeof AuthenticatedHealthcareAgentRouteRoute
+  '/loan-application-agent': typeof AuthenticatedLoanApplicationAgentRouteRoute
   '/loan-followup-agent': typeof AuthenticatedLoanFollowupAgentRouteRoute
   '/organizations': typeof AuthenticatedOrganizationsRouteRoute
   '/roles': typeof AuthenticatedRolesRouteRoute
@@ -131,6 +139,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/chat-agent': typeof AuthenticatedChatAgentRouteRoute
   '/healthcare-agent': typeof AuthenticatedHealthcareAgentRouteRoute
+  '/loan-application-agent': typeof AuthenticatedLoanApplicationAgentRouteRoute
   '/loan-followup-agent': typeof AuthenticatedLoanFollowupAgentRouteRoute
   '/organizations': typeof AuthenticatedOrganizationsRouteRoute
   '/roles': typeof AuthenticatedRolesRouteRoute
@@ -150,6 +159,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/_authenticated/chat-agent': typeof AuthenticatedChatAgentRouteRoute
   '/_authenticated/healthcare-agent': typeof AuthenticatedHealthcareAgentRouteRoute
+  '/_authenticated/loan-application-agent': typeof AuthenticatedLoanApplicationAgentRouteRoute
   '/_authenticated/loan-followup-agent': typeof AuthenticatedLoanFollowupAgentRouteRoute
   '/_authenticated/organizations': typeof AuthenticatedOrganizationsRouteRoute
   '/_authenticated/roles': typeof AuthenticatedRolesRouteRoute
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/chat-agent'
     | '/healthcare-agent'
+    | '/loan-application-agent'
     | '/loan-followup-agent'
     | '/organizations'
     | '/roles'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
   to:
     | '/chat-agent'
     | '/healthcare-agent'
+    | '/loan-application-agent'
     | '/loan-followup-agent'
     | '/organizations'
     | '/roles'
@@ -204,6 +216,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/_authenticated/chat-agent'
     | '/_authenticated/healthcare-agent'
+    | '/_authenticated/loan-application-agent'
     | '/_authenticated/loan-followup-agent'
     | '/_authenticated/organizations'
     | '/_authenticated/roles'
@@ -323,6 +336,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLoanFollowupAgentRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/loan-application-agent': {
+      id: '/_authenticated/loan-application-agent'
+      path: '/loan-application-agent'
+      fullPath: '/loan-application-agent'
+      preLoaderRoute: typeof AuthenticatedLoanApplicationAgentRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/healthcare-agent': {
       id: '/_authenticated/healthcare-agent'
       path: '/healthcare-agent'
@@ -350,6 +370,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedChatAgentRouteRoute: typeof AuthenticatedChatAgentRouteRoute
   AuthenticatedHealthcareAgentRouteRoute: typeof AuthenticatedHealthcareAgentRouteRoute
+  AuthenticatedLoanApplicationAgentRouteRoute: typeof AuthenticatedLoanApplicationAgentRouteRoute
   AuthenticatedLoanFollowupAgentRouteRoute: typeof AuthenticatedLoanFollowupAgentRouteRoute
   AuthenticatedOrganizationsRouteRoute: typeof AuthenticatedOrganizationsRouteRoute
   AuthenticatedRolesRouteRoute: typeof AuthenticatedRolesRouteRoute
@@ -362,6 +383,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChatAgentRouteRoute: AuthenticatedChatAgentRouteRoute,
   AuthenticatedHealthcareAgentRouteRoute:
     AuthenticatedHealthcareAgentRouteRoute,
+  AuthenticatedLoanApplicationAgentRouteRoute:
+    AuthenticatedLoanApplicationAgentRouteRoute,
   AuthenticatedLoanFollowupAgentRouteRoute:
     AuthenticatedLoanFollowupAgentRouteRoute,
   AuthenticatedOrganizationsRouteRoute: AuthenticatedOrganizationsRouteRoute,

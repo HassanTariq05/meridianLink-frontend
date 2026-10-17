@@ -35,6 +35,11 @@ export const sidebarData: SidebarData = {
           url: '/healthcare-agent',
           icon: Mic,
         },
+        {
+          title: 'Help Desk Agent 2',
+          url: '/loan-application-agent',
+          icon: Mic,
+        },
         // {
         //   title: 'Tasks',
         //   url: '/tasks',
