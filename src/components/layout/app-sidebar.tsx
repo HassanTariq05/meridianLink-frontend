@@ -7,8 +7,8 @@ import {
   SidebarRail,
   useSidebar,
 } from '@/components/ui/sidebar'
-import { Logo } from '../Logo'
-import { LogoCollapsed } from '../logo-collapsed'
+import { Logo } from '../logo/logo'
+import { LogoCollapsed } from '../logo/logo-collapsed'
 import { sidebarData } from './data/sidebar-data'
 import { NavGroup } from './nav-group'
 import { SidebarData } from './types'
