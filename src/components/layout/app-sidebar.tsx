@@ -102,9 +102,6 @@ export function AppSidebar() {
           />
         ))}
       </SidebarContent>
-      {/* <SidebarFooter>
-        <NavUser user={dynamicSidebarData.user} />
-      </SidebarFooter> */}
       <SidebarRail />
     </Sidebar>
   )
