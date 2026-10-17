@@ -323,9 +323,9 @@ export default function ChatAgent() {
                         >
                           {!isUser && (
                             <img
-                              src={'/images/logo_collapsed.png'}
-                              alt='Flux Flow Logo'
-                              style={{ height: '28px', width: 'auto' }}
+                              src='/images/icon.svg'
+                              alt='Informechs Icon'
+                              className='h-7 w-7 shrink-0 object-contain'
                             />
                           )}
 
@@ -374,9 +374,9 @@ export default function ChatAgent() {
                     {isGenerating && (
                       <div className='flex gap-3 sm:gap-4'>
                         <img
-                          src={'/images/logo_collapsed.png'}
-                          alt='Flux Flow Logo'
-                          style={{ height: '28px', width: 'auto' }}
+                          src='/images/icon.svg'
+                          alt='Informechs Icon'
+                          className='h-7 w-7 shrink-0 object-contain'
                         />
 
                         <div className='bg-muted/40 rounded-2xl rounded-bl-md border border-violet-500/10 px-4 py-3'>

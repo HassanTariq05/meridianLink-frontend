@@ -1,6 +1,5 @@
 import { useAuthStore } from '@/stores/auth-store'
 import { useLayout } from '@/context/layout-provider'
-import { useTheme } from '@/context/theme-provider'
 import {
   Sidebar,
   SidebarContent,
@@ -8,6 +7,8 @@ import {
   SidebarRail,
   useSidebar,
 } from '@/components/ui/sidebar'
+import { Logo } from '../Logo'
+import { LogoCollapsed } from '../logo-collapsed'
 import { sidebarData } from './data/sidebar-data'
 import { NavGroup } from './nav-group'
 import { SidebarData } from './types'
@@ -23,8 +24,6 @@ export function AppSidebar() {
 
   // const { data: accreditations } = useAccreditations(isSuperAdmin, orgId)
   // const {data : accreditations} = [useAccreditations(isSuperAdmin, orgId)]
-
-  const { theme } = useTheme()
 
   const { state } = useSidebar()
   // const accreditationItems: {
@@ -76,11 +75,7 @@ export function AppSidebar() {
               justifyContent: 'flex-start',
             }}
           >
-            <img
-              src={theme === 'dark' ? '/images/logo.png' : '/images/logo.png'}
-              alt='Total Quality App Logo'
-              style={{ height: '32px', width: 'auto' }}
-            />
+            <Logo />
           </div>
         </SidebarHeader>
       )}
@@ -90,18 +85,10 @@ export function AppSidebar() {
           <div
             style={{
               display: 'flex',
-              justifyContent: 'flex-start',
+              justifyContent: 'center',
             }}
           >
-            <img
-              src={
-                theme === 'dark'
-                  ? '/images/logo_collapsed.png'
-                  : '/images/logo_collapsed.png'
-              }
-              alt='Total Quality App Logo'
-              style={{ height: '32px', width: 'auto' }}
-            />
+            <LogoCollapsed />
           </div>
         </SidebarHeader>
       )}
