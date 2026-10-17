@@ -8,7 +8,6 @@ import {
   UserRound,
   Wallet,
 } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
 import {
   Dialog,
   DialogContent,
@@ -22,7 +21,6 @@ import {
   formatLoanType,
   getLoanTypeMeta,
   LoanApplication,
-  STATUS_META,
 } from './loan-application-columns'
 
 type Tone = 'violet' | 'emerald' | 'sky' | 'amber'
@@ -103,8 +101,6 @@ function DetailItem({
 }
 
 function ApplicationDetails({ application }: { application: LoanApplication }) {
-  const status = (application.status || 'new').toLowerCase()
-  const statusMeta = STATUS_META[status] ?? STATUS_META.new
   const loanMeta = getLoanTypeMeta(application.loan_type)
   const LoanIcon = loanMeta.icon
   const amount = Number(application.requested_amount) || 0
